@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Calculator</string>
+    <string name="digit_one">1</string>
+    <string name="digit_two">2</string>
+    <string name="digit_three">3</string>
+    <string name="digit_four">4</string>
+    <string name="digit_five">5</string>
+    <string name="digit_six">6</string>
+    <string name="digit_seven">7</string>
+    <string name="digit_eight">8</string>
+    <string name="digit_nine">9</string>
+    <string name="digit_zero">0</string>
+    <string name="cosinus">cos</string>
+    <string name="sinus">sin</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="divide">/</string>
+    <string name="multiply">x</string>
+    <string name="computate">=</string>
+    <string name="tangens">tan</string>
+    <string name="factorial">x!</string>
+    <string name="log_natural">ln</string>
+    <string name="open_bracket">(</string>
+    <string name="close_bracket">)</string>
+    <string name="pi">\u03C0</string>
+    <string name="backward">1/x</string>
+    <string name="dot">.</string>
+    <string name="pow_x_y">X&lt;sup&gt;y&lt;/sup&gt;</string>
+    <string name="sqrt">\u221a</string>
+    <string name="acosinus">atan</string>
+    <string name="asinus">asin</string>
+    <string name="atangens">acos</string>
+</resources>

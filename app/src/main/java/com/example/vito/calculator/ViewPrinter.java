@@ -1,38 +1,69 @@
 package com.example.vito.calculator;
 
 import android.widget.EditText;
-import android.widget.TextView;
 
-public class ViewPrinter<T extends TextView> {
-    private T computationTextView;
+public class ViewPrinter {
+    private EditText computationView;
+    private ExpressionComputator expressionComputator;
     private int cursorPosition;
 
-    public ViewPrinter(T computationTextView) {
-        this.computationTextView = computationTextView;
-        cursorPosition = 0;
+    public ViewPrinter(EditText computationView) {
+        this.computationView = computationView;
+        initialiseComputation();
     }
 
-    public void print(String computationExpression, int cursorPosition) {
-        clear();
-        computationTextView.setText(computationExpression);
-        if (computationTextView instanceof EditText)
-            setCursorPosition(cursorPosition);
+    private void initialiseComputation() {
+        expressionComputator = new ExpressionComputator(computationView.getText().toString());
+        cursorPosition = computationView.getText().toString().length();
     }
 
-    public void print(String computationExpression) {
-        clear();
-        computationTextView.setText(computationExpression);
+    public String computate() {
+        String result;
+        try {
+            result = expressionComputator.computate();
+        } catch (Exception e) {
+            initialiseComputation();
+            throw e;
+        }
+        return result;
     }
 
-    public void clear() {
-        computationTextView.setText("");
+    public void delete() {
+        cursorPosition = getCursorPosition();
+        if (cursorPosition > 0) {
+            expressionComputator.delete(cursorPosition);
+            cursorPosition -= 1;
+            print();
+        }
+
     }
 
-    public int getCursorPosition() {
-        return computationTextView.getSelectionStart();
+    private int getCursorPosition() {
+        return computationView.getSelectionStart();
     }
 
     private void setCursorPosition(int position) {
-        ((EditText) computationTextView).setSelection(position);
+        computationView.setSelection(position);
+    }
+
+    public void add(String input) {
+        cursorPosition = getCursorPosition();
+        if (input.matches("[a-z]+\\(")) {
+            expressionComputator.add(input + ")", cursorPosition);
+        } else {
+            expressionComputator.add(input, cursorPosition);
+        }
+        cursorPosition += input.length();
+        print();
+    }
+
+    private void print() {
+        computationView.setText(expressionComputator.getExpression());
+        setCursorPosition(cursorPosition);
+    }
+
+    public void clear() {
+        expressionComputator.clear();
+        computationView.setText(expressionComputator.getExpression());
     }
 }

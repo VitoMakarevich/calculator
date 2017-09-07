@@ -46,51 +46,46 @@ public class MainActivity extends AppCompatActivity {
 
         final EditText computationEditText = (EditText) findViewById(R.id.computation_edit_text);
         computationEditText.setShowSoftInputOnFocus(false);
-        TextView resultTextView = (TextView) findViewById(R.id.result_text_view);
+        final TextView resultTextView = (TextView) findViewById(R.id.result_text_view);
 
-        final ViewPrinter<TextView> resultViewPrinter = new ViewPrinter<>(resultTextView);
-        final ViewPrinter<EditText> computationViewPrinter = new ViewPrinter<>(computationEditText);
+        final ViewPrinter computationViewPrinter = new ViewPrinter(computationEditText);
 
-        final ComputationExpression computationExpression = new ComputationExpression();
-
-        buttonZero.setOnClickListener(getSimpleOnClickListener("0", computationExpression, computationViewPrinter));
-        buttonOne.setOnClickListener(getSimpleOnClickListener("1", computationExpression, computationViewPrinter));
-        buttonTwo.setOnClickListener(getSimpleOnClickListener("2", computationExpression, computationViewPrinter));
-        buttonThree.setOnClickListener(getSimpleOnClickListener("3", computationExpression, computationViewPrinter));
-        buttonFour.setOnClickListener(getSimpleOnClickListener("4", computationExpression, computationViewPrinter));
-        buttonFive.setOnClickListener(getSimpleOnClickListener("5", computationExpression, computationViewPrinter));
-        buttonSix.setOnClickListener(getSimpleOnClickListener("6", computationExpression, computationViewPrinter));
-        buttonSeven.setOnClickListener(getSimpleOnClickListener("7", computationExpression, computationViewPrinter));
-        buttonEight.setOnClickListener(getSimpleOnClickListener("8", computationExpression, computationViewPrinter));
-        buttonNine.setOnClickListener(getSimpleOnClickListener("9", computationExpression, computationViewPrinter));
-        buttonDot.setOnClickListener(getSimpleOnClickListener(".", computationExpression, computationViewPrinter));
-        buttonPlus.setOnClickListener(getSimpleOnClickListener("+", computationExpression, computationViewPrinter));
-        buttonMinus.setOnClickListener(getSimpleOnClickListener("-", computationExpression, computationViewPrinter));
-        buttonDivide.setOnClickListener(getSimpleOnClickListener("/", computationExpression, computationViewPrinter));
-        buttonMultiply.setOnClickListener(getSimpleOnClickListener("*", computationExpression, computationViewPrinter));
-        buttonOpenBracket.setOnClickListener(getSimpleOnClickListener("(", computationExpression, computationViewPrinter));
-        buttonCloseBracket.setOnClickListener(getSimpleOnClickListener(")", computationExpression, computationViewPrinter));
-        buttonBackward.setOnClickListener(getSimpleOnClickListener("1/", computationExpression, computationViewPrinter));
-        buttonSinus.setOnClickListener(getSimpleOnClickListener("sin(", computationExpression, computationViewPrinter));
-        buttonCosinus.setOnClickListener(getSimpleOnClickListener("cos(", computationExpression, computationViewPrinter));
-        buttonTangens.setOnClickListener(getSimpleOnClickListener("tan(", computationExpression, computationViewPrinter));
-        buttonFactorial.setOnClickListener(getSimpleOnClickListener("!", computationExpression, computationViewPrinter));
-        buttonAcosinus.setOnClickListener(getSimpleOnClickListener("acos(", computationExpression, computationViewPrinter));
-        buttonAsinus.setOnClickListener(getSimpleOnClickListener("asin(", computationExpression, computationViewPrinter));
-        buttonAtangens.setOnClickListener(getSimpleOnClickListener("atan(", computationExpression, computationViewPrinter));
+        buttonZero.setOnClickListener(getSimpleOnClickListener("0", computationViewPrinter));
+        buttonOne.setOnClickListener(getSimpleOnClickListener("1", computationViewPrinter));
+        buttonTwo.setOnClickListener(getSimpleOnClickListener("2", computationViewPrinter));
+        buttonThree.setOnClickListener(getSimpleOnClickListener("3", computationViewPrinter));
+        buttonFour.setOnClickListener(getSimpleOnClickListener("4", computationViewPrinter));
+        buttonFive.setOnClickListener(getSimpleOnClickListener("5", computationViewPrinter));
+        buttonSix.setOnClickListener(getSimpleOnClickListener("6", computationViewPrinter));
+        buttonSeven.setOnClickListener(getSimpleOnClickListener("7", computationViewPrinter));
+        buttonEight.setOnClickListener(getSimpleOnClickListener("8", computationViewPrinter));
+        buttonNine.setOnClickListener(getSimpleOnClickListener("9", computationViewPrinter));
+        buttonDot.setOnClickListener(getSimpleOnClickListener(".", computationViewPrinter));
+        buttonPlus.setOnClickListener(getSimpleOnClickListener("+", computationViewPrinter));
+        buttonMinus.setOnClickListener(getSimpleOnClickListener("-", computationViewPrinter));
+        buttonDivide.setOnClickListener(getSimpleOnClickListener("/", computationViewPrinter));
+        buttonMultiply.setOnClickListener(getSimpleOnClickListener("*", computationViewPrinter));
+        buttonOpenBracket.setOnClickListener(getSimpleOnClickListener("(", computationViewPrinter));
+        buttonCloseBracket.setOnClickListener(getSimpleOnClickListener(")", computationViewPrinter));
+        buttonBackward.setOnClickListener(getSimpleOnClickListener("1/", computationViewPrinter));
+        buttonSinus.setOnClickListener(getSimpleOnClickListener("sin(", computationViewPrinter));
+        buttonCosinus.setOnClickListener(getSimpleOnClickListener("cos(", computationViewPrinter));
+        buttonTangens.setOnClickListener(getSimpleOnClickListener("tan(", computationViewPrinter));
+        buttonFactorial.setOnClickListener(getSimpleOnClickListener("!", computationViewPrinter));
+        buttonAcosinus.setOnClickListener(getSimpleOnClickListener("acos(", computationViewPrinter));
+        buttonAsinus.setOnClickListener(getSimpleOnClickListener("asin(", computationViewPrinter));
+        buttonAtangens.setOnClickListener(getSimpleOnClickListener("atan(", computationViewPrinter));
 
         buttonBackspace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String computationString = computationExpression.delete();
-                computationViewPrinter.print(computationString);
+                computationViewPrinter.delete();
             }
         });
 
         buttonClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                computationExpression.clear();
                 computationViewPrinter.clear();
             }
         });
@@ -100,26 +95,25 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String result = null;
                 try {
-                    result = computationExpression.computate();
+                    result = computationViewPrinter.computate();
                 } catch (Exception e) {
-                    resultViewPrinter.print(getString(R.string.invalid_expression_error));
+                    resultTextView.setText(getString(R.string.invalid_expression_error));
                 }
                 if (result != null) {
-                    resultViewPrinter.print(result, computationExpression.getComputationString().length());
+                    resultTextView.setText(result);
                 }
             }
         });
     }
 
     //here is factory method
-    private View.OnClickListener getSimpleOnClickListener(final String text, final ComputationExpression expression, final ViewPrinter viewPrinter) {
+    private View.OnClickListener getSimpleOnClickListener(final String text, final ViewPrinter viewPrinter) {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int cursorPosition = viewPrinter.getCursorPosition();
-                String computationString = expression.add(text, cursorPosition);
-                viewPrinter.print(computationString, cursorPosition + text.length());
+                viewPrinter.add(text);
             }
         };
     }
 }
+

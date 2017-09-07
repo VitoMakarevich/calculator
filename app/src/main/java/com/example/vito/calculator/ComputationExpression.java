@@ -1,5 +1,8 @@
 package com.example.vito.calculator;
 
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
+
 public class ComputationExpression {
     private String computationString;
 
@@ -8,10 +11,10 @@ public class ComputationExpression {
         computationString = "";
     }
 
-    public String add(String text) {
+    public String add(String text, int position) {
         if (isComputeable()) {
             //todo add adding logic check
-            computationString += text;
+            computationString = new StringBuilder(computationString).insert(position, text).toString();
         }
         return computationString;
     }
@@ -22,7 +25,14 @@ public class ComputationExpression {
 
     public String computate() {
         //todo add computation logic, use for this library which parses string and gets int
-        return computationString;
+        Double result;
+        try {
+            Expression e = new ExpressionBuilder(computationString).build();
+            result = e.evaluate();
+        } catch (Exception e) {
+            throw e;
+        }
+        return String.valueOf(result);
     }
 
     public String delete() {

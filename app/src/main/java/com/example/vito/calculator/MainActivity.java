@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,11 +44,12 @@ public class MainActivity extends AppCompatActivity {
         Button buttonAtangens = (Button) findViewById(R.id.atangens_button);
 
 
-        final TextView computationTextView = (TextView) findViewById(R.id.computation_text_view);
+        final EditText computationEditText = (EditText) findViewById(R.id.computation_edit_text);
+        computationEditText.setShowSoftInputOnFocus(false);
         TextView resultTextView = (TextView) findViewById(R.id.result_text_view);
 
-        final ViewPrinter resultViewPrinter = new ViewPrinter(resultTextView);
-        final ViewPrinter computationViewPrinter = new ViewPrinter(computationTextView);
+        final ViewPrinter<TextView> resultViewPrinter = new ViewPrinter<>(resultTextView);
+        final ViewPrinter<EditText> computationViewPrinter = new ViewPrinter<>(computationEditText);
 
         final ComputationExpression computationExpression = new ComputationExpression();
 
@@ -96,10 +98,15 @@ public class MainActivity extends AppCompatActivity {
         buttonComputate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String result = computationExpression.computate();
-                computationViewPrinter.clear();
-                computationExpression.clear();
-                resultViewPrinter.print(result);
+                String result = null;
+                try {
+                    result = computationExpression.computate();
+                } catch (Exception e) {
+                    resultViewPrinter.print(getString(R.string.invalid_expression_error));
+                }
+                if (result != null) {
+                    resultViewPrinter.print(result, computationExpression.getComputationString().length());
+                }
             }
         });
     }
@@ -109,8 +116,9 @@ public class MainActivity extends AppCompatActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String computationString = expression.add(text);
-                viewPrinter.print(computationString);
+                int cursorPosition = viewPrinter.getCursorPosition();
+                String computationString = expression.add(text, cursorPosition);
+                viewPrinter.print(computationString, cursorPosition + text.length());
             }
         };
     }

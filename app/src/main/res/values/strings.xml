@@ -28,4 +28,5 @@
     <string name="acosinus">acos</string>
     <string name="asinus">asin</string>
     <string name="atangens">atan</string>
+    <string name="invalid_expression_error">Error</string>
 </resources>

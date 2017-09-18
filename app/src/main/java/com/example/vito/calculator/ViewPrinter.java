@@ -15,6 +15,7 @@ public class ViewPrinter {
     private void initialiseComputation() {
         expressionComputator = new ExpressionComputator(computationView.getText().toString());
         cursorPosition = computationView.getText().toString().length();
+        print();
     }
 
     public String computate() {
@@ -38,11 +39,11 @@ public class ViewPrinter {
 
     }
 
-    private int getCursorPosition() {
+    public int getCursorPosition() {
         return computationView.getSelectionStart();
     }
 
-    private void setCursorPosition(int position) {
+    public void setCursorPosition(int position) {
         computationView.setSelection(position);
     }
 

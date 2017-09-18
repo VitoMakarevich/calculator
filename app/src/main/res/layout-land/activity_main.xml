@@ -5,8 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.vito.calculator.MainActivity"
-    tools:layout_editor_absoluteX="16dp"
-    tools:layout_editor_absoluteY="16dp">
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="89dp">
+
+    <TextView
+        android:id="@+id/result_text_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/text_view_border"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textAlignment="textEnd"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/computation_edit_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/computation_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:background="@drawable/text_view_border"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:textAlignment="textEnd"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/minus_button"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/result_text_view" />
 
     <Button
         android:id="@+id/plus_button"
@@ -15,7 +48,7 @@
         android:text="@string/plus"
         app:layout_constraintBottom_toTopOf="@+id/multiply_button"
         app:layout_constraintLeft_toRightOf="@+id/six_button"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/sinus_button"
         app:layout_constraintTop_toBottomOf="@+id/minus_button" />
 
     <Button
@@ -25,16 +58,16 @@
         android:text="@string/minus"
         app:layout_constraintBottom_toTopOf="@+id/plus_button"
         app:layout_constraintLeft_toRightOf="@+id/nine_button"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backward_button" />
+        app:layout_constraintRight_toLeftOf="@+id/open_bracket_button"
+        app:layout_constraintTop_toBottomOf="@+id/computation_edit_text" />
 
     <Button
         android:id="@+id/backward_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/backward"
-        app:layout_constraintBottom_toTopOf="@+id/minus_button"
-        app:layout_constraintLeft_toRightOf="@+id/close_bracket_button"
+        app:layout_constraintBottom_toTopOf="@+id/xpowy_button"
+        app:layout_constraintLeft_toRightOf="@+id/acosinus_button"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/clear_button" />
 
@@ -44,7 +77,7 @@
         android:layout_height="0dp"
         android:text="@string/clear"
         app:layout_constraintBottom_toTopOf="@+id/backward_button"
-        app:layout_constraintLeft_toRightOf="@+id/tangens_button"
+        app:layout_constraintLeft_toRightOf="@+id/asinus_button"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backspace_button"
         tools:layout_constraintHorizontal_weight="1/4" />
@@ -55,47 +88,9 @@
         android:layout_height="0dp"
         android:text="@string/backspace"
         app:layout_constraintBottom_toTopOf="@+id/clear_button"
-        app:layout_constraintLeft_toRightOf="@+id/atangens_button"
+        app:layout_constraintLeft_toRightOf="@+id/close_bracket_button"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/computation_edit_text" />
-
-    <TextView
-        android:id="@+id/result_text_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="6dp"
-        android:background="@drawable/text_view_border"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textAlignment="textEnd"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/computation_edit_text"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/computation_edit_text"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/text_view_border"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:scrollHorizontally="true"
-        android:singleLine="true"
-        android:textAlignment="textEnd"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/backspace_button"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/result_text_view" />
 
     <Button
         android:id="@+id/zero_button"
@@ -134,7 +129,7 @@
         android:text="@string/divide"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/computate_button"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tangens_button"
         app:layout_constraintTop_toBottomOf="@+id/multiply_button" />
 
     <Button
@@ -165,40 +160,39 @@
         app:layout_constraintBottom_toTopOf="@+id/four_button"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/eight_button"
-        app:layout_constraintTop_toBottomOf="@+id/xpowy_button" />
+        app:layout_constraintTop_toBottomOf="@+id/computation_edit_text" />
 
     <Button
         android:id="@+id/xpowy_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/xpowy"
-        app:layout_constraintBottom_toTopOf="@+id/seven_button"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/open_bracket_button"
-        app:layout_constraintTop_toBottomOf="@+id/cosinus_button" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/atangens_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backward_button" />
 
     <Button
         android:id="@+id/cosinus_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/cosinus"
-        app:layout_constraintBottom_toTopOf="@+id/xpowy_button"
+        app:layout_constraintBottom_toTopOf="@+id/tangens_button"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/sinus_button"
-        app:layout_constraintTop_toBottomOf="@+id/acosinus_button"
+        app:layout_constraintLeft_toRightOf="@+id/multiply_button"
+        app:layout_constraintRight_toLeftOf="@+id/acosinus_button"
+        app:layout_constraintTop_toBottomOf="@+id/sinus_button"
         tools:layout_constraintHorizontal_weight="1/4" />
 
     <Button
         android:id="@+id/acosinus_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginLeft="0dp"
         android:text="@string/acosinus"
-        app:layout_constraintBottom_toTopOf="@+id/cosinus_button"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/asinus_button"
-        app:layout_constraintTop_toBottomOf="@+id/computation_edit_text" />
+        app:layout_constraintBottom_toTopOf="@+id/atangens_button"
+        app:layout_constraintLeft_toRightOf="@+id/cosinus_button"
+        app:layout_constraintRight_toLeftOf="@+id/backward_button"
+        app:layout_constraintTop_toBottomOf="@+id/asinus_button" />
 
     <Button
         android:id="@+id/two_button"
@@ -228,27 +222,27 @@
         app:layout_constraintBottom_toTopOf="@+id/five_button"
         app:layout_constraintLeft_toRightOf="@+id/seven_button"
         app:layout_constraintRight_toLeftOf="@+id/nine_button"
-        app:layout_constraintTop_toBottomOf="@+id/open_bracket_button" />
+        app:layout_constraintTop_toBottomOf="@+id/computation_edit_text" />
 
     <Button
         android:id="@+id/open_bracket_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/open_bracket"
-        app:layout_constraintBottom_toTopOf="@+id/eight_button"
-        app:layout_constraintLeft_toRightOf="@+id/xpowy_button"
+        app:layout_constraintBottom_toTopOf="@+id/sinus_button"
+        app:layout_constraintLeft_toRightOf="@+id/minus_button"
         app:layout_constraintRight_toLeftOf="@+id/close_bracket_button"
-        app:layout_constraintTop_toBottomOf="@+id/sinus_button" />
+        app:layout_constraintTop_toBottomOf="@+id/computation_edit_text" />
 
     <Button
         android:id="@+id/sinus_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/sinus"
-        app:layout_constraintBottom_toTopOf="@+id/open_bracket_button"
-        app:layout_constraintLeft_toRightOf="@+id/cosinus_button"
-        app:layout_constraintRight_toLeftOf="@+id/tangens_button"
-        app:layout_constraintTop_toBottomOf="@+id/asinus_button"
+        app:layout_constraintBottom_toTopOf="@+id/cosinus_button"
+        app:layout_constraintLeft_toRightOf="@+id/plus_button"
+        app:layout_constraintRight_toLeftOf="@+id/asinus_button"
+        app:layout_constraintTop_toBottomOf="@+id/open_bracket_button"
         tools:layout_constraintHorizontal_weight="1/4" />
 
     <Button
@@ -256,10 +250,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/asinus"
-        app:layout_constraintBottom_toTopOf="@+id/sinus_button"
-        app:layout_constraintLeft_toRightOf="@+id/acosinus_button"
-        app:layout_constraintRight_toLeftOf="@+id/atangens_button"
-        app:layout_constraintTop_toBottomOf="@+id/computation_edit_text" />
+        app:layout_constraintBottom_toTopOf="@+id/acosinus_button"
+        app:layout_constraintLeft_toRightOf="@+id/sinus_button"
+        app:layout_constraintRight_toLeftOf="@+id/clear_button"
+        app:layout_constraintTop_toBottomOf="@+id/close_bracket_button" />
 
     <Button
         android:id="@+id/three_button"
@@ -289,27 +283,27 @@
         app:layout_constraintBottom_toTopOf="@+id/six_button"
         app:layout_constraintLeft_toRightOf="@+id/eight_button"
         app:layout_constraintRight_toLeftOf="@+id/minus_button"
-        app:layout_constraintTop_toBottomOf="@+id/close_bracket_button" />
+        app:layout_constraintTop_toBottomOf="@+id/computation_edit_text" />
 
     <Button
         android:id="@+id/close_bracket_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/close_bracket"
-        app:layout_constraintBottom_toTopOf="@+id/nine_button"
+        app:layout_constraintBottom_toTopOf="@+id/asinus_button"
         app:layout_constraintLeft_toRightOf="@+id/open_bracket_button"
-        app:layout_constraintRight_toLeftOf="@+id/backward_button"
-        app:layout_constraintTop_toBottomOf="@+id/tangens_button" />
+        app:layout_constraintRight_toLeftOf="@+id/backspace_button"
+        app:layout_constraintTop_toBottomOf="@+id/computation_edit_text" />
 
     <Button
         android:id="@+id/tangens_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/tangens"
-        app:layout_constraintBottom_toTopOf="@+id/close_bracket_button"
-        app:layout_constraintLeft_toRightOf="@+id/sinus_button"
-        app:layout_constraintRight_toLeftOf="@+id/clear_button"
-        app:layout_constraintTop_toBottomOf="@+id/atangens_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/divide_button"
+        app:layout_constraintRight_toLeftOf="@+id/atangens_button"
+        app:layout_constraintTop_toBottomOf="@+id/cosinus_button"
         tools:layout_constraintHorizontal_weight="1/4" />
 
     <Button
@@ -317,10 +311,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/atangens"
-        app:layout_constraintBottom_toTopOf="@+id/tangens_button"
-        app:layout_constraintLeft_toRightOf="@+id/asinus_button"
-        app:layout_constraintRight_toLeftOf="@+id/backspace_button"
-        app:layout_constraintTop_toBottomOf="@+id/computation_edit_text" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tangens_button"
+        app:layout_constraintRight_toLeftOf="@+id/xpowy_button"
+        app:layout_constraintTop_toBottomOf="@+id/acosinus_button" />
 
     <Button
         android:id="@+id/multiply_button"
@@ -329,6 +323,7 @@
         android:text="@string/multiply"
         app:layout_constraintBottom_toTopOf="@+id/divide_button"
         app:layout_constraintLeft_toRightOf="@+id/three_button"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/cosinus_button"
         app:layout_constraintTop_toBottomOf="@+id/plus_button" />
+
 </android.support.constraint.ConstraintLayout>

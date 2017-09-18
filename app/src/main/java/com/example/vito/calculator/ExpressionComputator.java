@@ -28,6 +28,7 @@ public class ExpressionComputator {
         } catch (Exception e) {
             throw e;
         }
+
         return String.valueOf(result);
     }
 

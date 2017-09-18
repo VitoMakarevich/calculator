@@ -18,7 +18,7 @@
     <string name="multiply">x</string>
     <string name="computate">=</string>
     <string name="tangens">tan</string>
-    <string name="factorial">x!</string>
+    <string name="xpowy">x^y</string>
     <string name="open_bracket">(</string>
     <string name="close_bracket">)</string>
     <string name="clear">C</string>

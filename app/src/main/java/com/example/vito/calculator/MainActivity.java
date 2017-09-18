@@ -9,6 +9,12 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String RESULT_TEXT_VALUE = "textValue";
+    private static final String COMPUTATION_TEXT_VALUE = "computationValue";
+    private static final String CURSOR_POSITION = "cursorPosition";
+    private EditText computationEditText;
+    private TextView resultTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,17 +44,24 @@ public class MainActivity extends AppCompatActivity {
         Button buttonSinus = (Button) findViewById(R.id.sinus_button);
         Button buttonCosinus = (Button) findViewById(R.id.cosinus_button);
         Button buttonTangens = (Button) findViewById(R.id.tangens_button);
-        Button buttonFactorial = (Button) findViewById(R.id.factorial_button);
+        Button buttonXpowY = (Button) findViewById(R.id.xpowy_button);
         Button buttonAcosinus = (Button) findViewById(R.id.acosinus_button);
         Button buttonAsinus = (Button) findViewById(R.id.asinus_button);
         Button buttonAtangens = (Button) findViewById(R.id.atangens_button);
 
-
-        final EditText computationEditText = (EditText) findViewById(R.id.computation_edit_text);
+        computationEditText = (EditText) findViewById(R.id.computation_edit_text);
         computationEditText.setShowSoftInputOnFocus(false);
-        final TextView resultTextView = (TextView) findViewById(R.id.result_text_view);
-
+        resultTextView = (TextView) findViewById(R.id.result_text_view);
         final ViewPrinter computationViewPrinter = new ViewPrinter(computationEditText);
+        if (savedInstanceState != null) {
+            CharSequence result = savedInstanceState.getCharSequence(RESULT_TEXT_VALUE);
+            resultTextView.setText(result);
+            CharSequence computation = savedInstanceState.getCharSequence(COMPUTATION_TEXT_VALUE);
+            computationViewPrinter.add(computation.toString());
+            int cursorPosition = savedInstanceState.getInt(CURSOR_POSITION);
+            computationViewPrinter.setCursorPosition(cursorPosition);
+
+        }
 
         buttonZero.setOnClickListener(getSimpleOnClickListener("0", computationViewPrinter));
         buttonOne.setOnClickListener(getSimpleOnClickListener("1", computationViewPrinter));
@@ -71,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         buttonSinus.setOnClickListener(getSimpleOnClickListener("sin(", computationViewPrinter));
         buttonCosinus.setOnClickListener(getSimpleOnClickListener("cos(", computationViewPrinter));
         buttonTangens.setOnClickListener(getSimpleOnClickListener("tan(", computationViewPrinter));
-        buttonFactorial.setOnClickListener(getSimpleOnClickListener("!", computationViewPrinter));
+        buttonXpowY.setOnClickListener(getSimpleOnClickListener("^", computationViewPrinter));
         buttonAcosinus.setOnClickListener(getSimpleOnClickListener("acos(", computationViewPrinter));
         buttonAsinus.setOnClickListener(getSimpleOnClickListener("asin(", computationViewPrinter));
         buttonAtangens.setOnClickListener(getSimpleOnClickListener("atan(", computationViewPrinter));
@@ -104,6 +117,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putCharSequence(COMPUTATION_TEXT_VALUE, computationEditText.getText());
+        outState.putCharSequence(RESULT_TEXT_VALUE, resultTextView.getText());
+        outState.putInt(CURSOR_POSITION, computationEditText.getSelectionStart());
     }
 
     //here is factory method
